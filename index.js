@@ -27,16 +27,14 @@ function compress(img, output) {
 
     sharp(img)
     .jpeg({quality: 80})
+    .png({quality: 80})
     .toFile(output)
   });
 }
 
-
-
-// run('test.jpeg', 'output/new.jpeg');
-// compress('test.jpeg', 'output/new2.jpeg');
-mapdir.mapDir('./images', (file) => {
-  if (!['.jpg', '.jpeg'].includes(path.extname(file).toLowerCase())) return;
+function run(file) {
+  if (!['.jpg', '.jpeg', '.png'].includes(path.extname(file).toLowerCase())) 
+    console.log(file);
   console.log(file);
   
   const base = file.split('.').slice(0, -1).join('.');
@@ -50,4 +48,18 @@ mapdir.mapDir('./images', (file) => {
    newname = base + '-500x500_80' + ext;
    console.log(newname);
    resize(file, newname, 500);
-})
+}
+
+// run('test.jpeg', 'output/new.jpeg');
+// compress('test.jpeg', 'output/new2.jpeg');
+
+const args = process.argv.slice(2);
+if (args.length === 0) {
+  console.log("Please input a folder")
+} else {
+  console.log("Working on:", args[0]);
+
+  mapdir(args[0], (file) => {
+    run(file);
+  })
+}

@@ -27,4 +27,4 @@ function mapDir(dir, callback, finish) {
   })
 }
 
-exports.mapDir = mapDir
+module.exports = mapDir
