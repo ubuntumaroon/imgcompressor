@@ -11,10 +11,15 @@ function resize(img, output, size) {
       console.error(err)
       return
     }
-
-    sharp(img).resize(size)
-    .jpeg({quality: 80})
-    .toFile(output)
+    const image = sharp(img);
+    image.metadata()
+    .then(function(metadata) {
+      if (metadata.width > size) {
+        image.resize(size)
+          .jpeg({quality: 80})
+          .toFile(output)
+      } 
+    });
   });
 }
 
@@ -26,26 +31,30 @@ function compress(img, output) {
     }
 
     sharp(img)
-    .jpeg({quality: 80})
-    .png({quality: 80})
+    .jpeg({quality: 80, force: false})
+//    .png({quality: 80, force: false})
     .toFile(output)
   });
 }
 
 function run(file) {
   if (!['.jpg', '.jpeg', '.png'].includes(path.extname(file).toLowerCase())) 
-    console.log(file);
+    return;
   console.log(file);
   
   const base = file.split('.').slice(0, -1).join('.');
-  const ext = path.extname(file);
+  let ext = path.extname(file);
+  if (ext.toLowerCase() === '.png') {
+    ext = '.jpeg'
+  }
+  
   let newname = base + '_80' + ext;
   console.log(newname);
-  compress(file, newname);
-  newname = base + '-1000x1000_80' + ext;
+   compress(file, newname);
+  newname = base + '-1000_80' + ext;
   console.log(newname);
   resize(file, newname, 1000);
-   newname = base + '-500x500_80' + ext;
+   newname = base + '-500_80' + ext;
    console.log(newname);
    resize(file, newname, 500);
 }
