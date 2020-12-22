@@ -38,13 +38,13 @@ function compress(img, output) {
 }
 
 function run(file) {
-  if (!['.jpg', '.jpeg', '.png'].includes(path.extname(file).toLowerCase())) 
+  if (!['.jpg', '.jpeg', '.png', '.heic'].includes(path.extname(file).toLowerCase())) 
     return;
   console.log(file);
   
   const base = file.split('.').slice(0, -1).join('.');
   let ext = path.extname(file);
-  if (ext.toLowerCase() === '.png') {
+  if (ext.toLowerCase() === '.png' || ext.toLowerCase() === '.heic' ) {
     ext = '.jpeg'
   }
   
