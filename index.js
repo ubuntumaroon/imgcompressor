@@ -1,4 +1,3 @@
-const sharp = require("sharp");
 const fs = require('fs');
 const mapdir = require('./src/mapdir.js')
 const path = require('path')
@@ -16,16 +15,6 @@ function create_name(file, {size, quanlity=QUALITY}) {
     return `${base}_${size}_${quanlity}.jpeg`
 }
 
-function convert(file, {size, quanlity=QUALITY}) {
-  const new_file = create_name(file, {size, quanlity})
-  fs.access(new_file, fs.F_OK, (err) => {
-    if (err) { // file not exist, convert
-      console.log(new_file)
-      compress_img(file, new_file, {size: size})
-    } 
-  })
-}
-
 // simply check the file extension
 function is_img(file) {
   return ['.jpg', '.jpeg', '.png'].includes(path.extname(file).toLowerCase())
@@ -35,12 +24,22 @@ function is_compressed_img(file, quality=QUALITY) {
   return file.endsWith(`_${quality}.jpeg`)
 }
 
-function perform(file) {
+function compress(file) {
   if (!is_img(file) || is_compressed_img(file)) return
   
-  convert(file, {})
+  compress_one(file, {})
   SIZES.forEach(size => {
-    convert(file, {size: size})
+    compress_one(file, {size: size})
+  })
+}
+
+function compress_one(file, {size, quanlity=QUALITY}) {
+  const new_file = create_name(file, {size, quanlity})
+  fs.access(new_file, fs.F_OK, (err) => {
+    if (err) { // file not exist, convert
+      console.log(new_file)
+      compress_img(file, new_file, {size: size})
+    } 
   })
 }
 
@@ -51,7 +50,6 @@ if (args.length === 0) {
   console.log("Working on:", args[0]);
 
   mapdir(args[0], (file) => {
-    //run(file);
-    perform(file)
+    compress(file)
   })
 }
