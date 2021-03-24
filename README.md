@@ -1,6 +1,6 @@
 ## About The Project
 
-Batch compress image from jpeg and png. It compress all images in the input directory and the entire subtree.
+Batch compress image. Source images are either "jpeg" or "png", the compressed image in "jpeg" format. It compress all images in the input directory and the entire subtree.
 
 ### Built With
 
