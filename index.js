@@ -5,40 +5,6 @@ const path = require('path')
 const compress_img = require('./src/compressimg.js');
 
 
-// resize image if size smaller than original width
-function resize(img, output, size) {
-  fs.readFile(img, (err, img) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    const image = sharp(img);
-    image.metadata()
-    .then(function(metadata) {
-      if (metadata.width > size) {
-        image.resize(size)
-          .jpeg({quality: 80})
-          .toFile(output)
-      } 
-    });
-  });
-}
-
-// compress to jpg, 80%
-function compress(img, output) {
-  fs.readFile(img, (err, img) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-
-    sharp(img)
-    .jpeg({quality: 80, force: false})
-    .toFile(output)
-  });
-}
-
-
 const QUALITY = 80
 const SIZES = [500, 1000]
 
@@ -77,28 +43,6 @@ function perform(file) {
     convert(file, {size: size})
   })
 }
-
-function run(file) {
-  if (!['.jpg', '.jpeg', '.png'].includes(path.extname(file).toLowerCase())) 
-    return;
-  
-  const base = file.split('.').slice(0, -1).join('.');
-  let ext = path.extname(file);
-  if (ext.toLowerCase() === '.png') {
-    ext = '.jpeg'
-  }
-  
-  let newname = base + '_80' + ext;
-  console.log(newname);
-   compress(file, newname);
-  newname = base + '-1000_80' + ext;
-  console.log(newname);
-  resize(file, newname, 1000);
-   newname = base + '-500_80' + ext;
-   console.log(newname);
-   resize(file, newname, 500);
-}
-
 
 const args = process.argv.slice(2);
 if (args.length === 0) {
