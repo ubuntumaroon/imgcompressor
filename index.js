@@ -1,5 +1,5 @@
 const mapdir = require('./src/mapdir.js')
-const compress_file = require('./src/image.js')
+const compress2jpg = require('./src/compressor.js')
 const cli = require('./src/cli.js')
 
 // default values
@@ -12,7 +12,7 @@ const { dir, sizes, quality } = cli()
 console.log("Working on:", dir)
 
 mapdir(dir, (file) => {    
-  compress_file(file)
+  compress2jpg(file)
     .setSizes(sizes)
     .setQuality(quality)
     .output();

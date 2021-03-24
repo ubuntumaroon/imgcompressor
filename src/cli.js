@@ -7,7 +7,7 @@ function cli() {
     .description('Compress images in a directory recursively', {
       dir: 'directory where images are saved',
     })
-    .option('-s, --sizes   <number...>', 'list of required image width', [500, 1000])
+    .option('-s, --sizes   <number...>', 'list of required image width, if not a number or 0, image will not be resized', ['origin', 500, 1000])
     .option('-q, --quality <number>', 'image quanlity 1-100', 80)
     .action(dir =>{
     })

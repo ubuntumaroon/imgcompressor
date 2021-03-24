@@ -5,7 +5,7 @@ const sharp = require("sharp");
 
 const QUALITY = 80;
 
-class Compresser {
+class Compressor {
   constructor(img) {
     this.img = img;
     this.quality = QUALITY;
@@ -67,9 +67,9 @@ class Compresser {
   }
 }
 
-function compress_file(img) {
-  return new Compresser(img);
+function compress2jpg(img) {
+  return new Compressor(img);
 }
 
 
-module.exports = compress_file
+module.exports = compress2jpg
