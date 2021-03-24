@@ -10,9 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "fs": "0.0.1-security",
-    "heic-convert": "^1.2.3",
-    "heic2any": "0.0.3",
-    "imagemin-mozjpeg": "^9.0.0",
     "path": "^0.12.7",
     "sharp": "^0.26.2"
   }
