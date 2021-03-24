@@ -9,6 +9,7 @@
   "author": "Shaoyong Feng",
   "license": "MIT",
   "dependencies": {
+    "commander": "^7.2.0",
     "fs": "0.0.1-security",
     "path": "^0.12.7",
     "sharp": "^0.26.2"

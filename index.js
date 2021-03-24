@@ -1,16 +1,17 @@
 const mapdir = require('./src/mapdir.js')
 const compress = require('./src/image.js')
+const cli = require('./src/cli.js')
 
-const QUALITY = 80
-const SIZES = [500, 1000]
+// default values
+// const QUALITY = 80
+// const SIZES = [500, 1000]
 
-const args = process.argv.slice(2);
-if (args.length === 0) {
-  console.log("Please input a folder")
-} else {
-  console.log("Working on:", args[0]);
 
-  mapdir(args[0], (file) => {    
-    compress(file, SIZES, QUALITY)
-  })
-}
+const { dir, sizes, quality } = cli()
+
+console.log("Working on:", args[0])
+
+mapdir(dir, (file) => {    
+  compress(file, sizes, quality)
+})
+
