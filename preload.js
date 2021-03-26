@@ -34,7 +34,9 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   ipcRenderer.on('new-file-created', (event, file) =>{
-    document.getElementById('logs').append(file)
+    let pre = document.createElement('pre')
+    pre.append(file)
+    document.getElementById('logs').append(pre)
     console.log(file)
   })
 
