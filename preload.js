@@ -28,9 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   ipcRenderer.on('selected-directory', (event, path) => {
-    document.getElementById('selected-file').innerHTML = `You selected: ${path}`
-    console.log(`You selected: ${path}`)
-    console.log(path)
+    document.getElementById('selected-file').innerHTML = `Compressed images in: ${path}`
   })
 
   ipcRenderer.on('new-file-created', (event, file) =>{

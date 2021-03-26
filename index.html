@@ -17,7 +17,6 @@
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
         <button type="button" class="btn btn-primary px-4 me-sm-3" id="select-directory">Select directory</button>
       </div>
-      <div class="text-center" id="selected-file"></div>
       
       <div class="card border-info mt-4">
         <div class="card-header">Compress methods</div>
@@ -52,8 +51,8 @@
       <div class="card border-0 mt-4">
         <div class="card-body">
           <h5 class="card-title">Processing logs</h5>
-          <div class="bd-callout-info bd-callout" id="logs">
-
+          <p id="selected-file" class="text-secondary"></p>
+          <div style="max-height: 200px" class="bd-callout-info bd-callout bg-secondary overflow-auto" id="logs">
           </div>
           
         </div>

@@ -17,7 +17,7 @@ ipcMain.on('open-file-dialog', (event, args) => {
     })
   })
 
-  event.sender.send('selected-directory', { files, quality, sizes})
+  event.sender.send('selected-directory', files)
 })
 
 function sanitize(args) {
