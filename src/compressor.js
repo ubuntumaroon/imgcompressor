@@ -10,6 +10,7 @@ class Compressor {
     this.img = img;
     this.quality = QUALITY;
     this.sizes = [0];
+    this.callback
   }
 
   setSizes(sizes) {
@@ -24,23 +25,23 @@ class Compressor {
     return this;
   }
 
-  output() {
+  output(callback) {
     if (!this.isImg() || this.isCompressed())
       return;
     
     this.sizes.forEach(size => {
-      this.output_one(size)
+      this.output_one(size, callback)
     });
   }
 
-  output_one(size) {
+  output_one(size, callback) {
     if (!Number.isInteger(size) || size <= 0)
       size = undefined
     
     const new_file = this.createName(size)
     fs.access(new_file, fs.F_OK, (err) => {
       if (err) { // file not exist, convert
-        console.log(new_file)
+        callback && callback(new_file)
         compress_img(this.img, new_file, {size, quality: this.quality})
       } 
     })

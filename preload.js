@@ -33,21 +33,9 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log(path)
   })
 
-  const addBtn = document.getElementById('btn-down')
-// const input = addBtn.closest('.number-spinner').find('input')
-
-addBtn.addEventListener('click', (event) => {
-    console.log("clicked!")
-
-    // const v = parseInt(input.val().trim())
-    // v += 1
-    // input.val(value);
-    ipcRenderer.send('spinner-clicked')
-  })
-
-  ipcRenderer.on('btn-clicked', (event, path) => {
-    console.log(`You selected: ${path}`)
-    console.log(path)
+  ipcRenderer.on('new-file-created', (event, file) =>{
+    document.getElementById('logs').append(file)
+    console.log(file)
   })
 
 })
