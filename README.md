@@ -55,3 +55,6 @@ Options:
   ```
   node index.js . -s 200 -q 60
   ``` 
+## License
+
+Distributed under the MIT License. See LICENSE for more information.
