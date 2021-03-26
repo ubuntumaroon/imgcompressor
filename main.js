@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
-const glob = require('glob')
+// const glob = require('glob')
 const {ipcMain, dialog} = require('electron')
 
 
@@ -39,6 +39,7 @@ app.on('window-all-closed', () => {
 
 // load main process dependecies
 function loadProceses() {
-  const files = glob.sync(path.join(__dirname, 'main-process/*.js'))
-  files.forEach((file) => { require(file) })
+  // const files = glob.sync(path.join(__dirname, 'main-process/*.js'))
+  // files.forEach((file) => { require(file) })
+  require('./main-process/msg.js')
 }
