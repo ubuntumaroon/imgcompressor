@@ -2,8 +2,9 @@
   "name": "pic",
   "version": "1.0.0",
   "description": "crop and compress image",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Shaoyong Feng",
@@ -15,6 +16,7 @@
     "sharp": "^0.26.2"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
     "electron": "^12.0.2"
   }
 }

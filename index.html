@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Image compressor</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+</head>
+<body style="background: white;">
+  
+    <div class="px-4 py-5 my-5">
+      <h1 class="display-5 fw-bold  text-center">Image Compressor</h1>
+      <div class="col-6 mx-auto text-center">
+        Compress jpeg/png images to jpeg.
+      </div>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
+        <button type="button" class="btn btn-primary px-4 me-sm-3" id="select-directory">Select directory</button>
+      </div>
+      <div class="text-center" id="selected-file"></div>
+      
+      <div class="card border-info mt-4">
+        <div class="card-header">Compress methods</div>
+        <div class="card-body">
+        <!-- <form class="needs-validation" novalidate> -->
+          <div class="row mb-3">
+            <label for="quality" class="col-form-label col-form-label-sm">Quality <span class="text-muted small">(0-100)</span></label>
+            <div class="input-group">
+              <div class="input-group number-spinner" id="spinner">
+                <input type="number" class="form-control text-center" id="quality" value="80" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3" id="size-options">
+            <label for="quality" class="col-form-label col-form-label-sm">Resize to <span class="text-muted">(Optional, width in px, 0 for no crop)</span></label>
+            <div class="input-group mb-3 entry">
+              <input class="form-control" name="sizes" type="number" value="0" placeholder="width in px" required/>
+              <span class="input-group-btn ml-1">
+                  <button class="btn btn-success btn-add" type="button">
+                      <span">+</span>
+                  </button>
+              </span> 
+            </div>
+          </div>
+          
+                  
+        <!-- </form>  -->
+        </div>
+      </div>
+
+      <div class="card border-0 mt-4">
+        <div class="card-body" id="logs">
+          
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      window.$ = window.jQuery = require('./assets/js/jquery.min')
+      require('./assets/js/bootstrap.bundle.js')
+      require('./assets/js/num_spinner.js')
+      require('./assets/js/add_btn.js')
+    </script>
+</body>
+</html>
