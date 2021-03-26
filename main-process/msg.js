@@ -1,4 +1,6 @@
 const {ipcMain, dialog} = require('electron')
+const { watchFile } = require('fs')
+const { waitForDebugger } = require('inspector')
 const compress_dir = require('../src/recursive.js')
 
 ipcMain.on('open-file-dialog', (event, args) => {
@@ -7,16 +9,15 @@ ipcMain.on('open-file-dialog', (event, args) => {
   })
   if (files === undefined) return
 
-  const {quality, sizes} = args
-  size = Array.from(new Set(sizes))
+  const {quality, sizes} = sanitize(args)
+
   files.forEach(file =>{
-    console.log("processing")
-    compress_dir(file, size, quality, new_file => {
-      event.sender.send('new-file-created', new_file)
+    compress_dir({dir:file, sizes, quality}, file => {
+      event.sender.send('new-file-created', file)
     })
   })
 
-  event.sender.send('selected-directory', { files, quality, size})
+  event.sender.send('selected-directory', { files, quality, sizes})
 })
 
 function sanitize(args) {
