@@ -5,7 +5,7 @@ const compress_dir = require('../src/recursive.js')
 
 ipcMain.on('open-file-dialog', (event, args) => {
   files = dialog.showOpenDialogSync({
-    properties: ['openDirectory', 'openFile']
+    properties: ['openDirectory']
   })
   if (files === undefined) return
 
